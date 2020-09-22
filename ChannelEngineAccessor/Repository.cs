@@ -31,7 +31,7 @@ namespace ChannelEngine
                 {                    
                     var response = await client.SendAsync(request);
                     var content = await response.Content.ReadAsStringAsync();
-                    result = JsonConvert.DeserializeObject<ChannelEngineResponse>(content).Content;
+                    result = JsonConvert.DeserializeObject<ChannelEngineResponse<Order>>(content).Content;                    
                 }
             }
             return result;

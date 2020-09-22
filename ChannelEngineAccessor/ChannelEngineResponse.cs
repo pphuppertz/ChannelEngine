@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChannelEngine
 {
-    public class ChannelEngineResponse
+    public class ChannelEngineResponse<T>
     {
-        public IList<Order> Content { get; set; }
+        public IList<T> Content { get; set; }
         public int Count { get; set; }
         public int TotalCount { get; set; }
         public int ItemsPerPage { get; set; }
