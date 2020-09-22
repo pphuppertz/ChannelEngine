@@ -44,10 +44,5 @@ namespace ChannelEngine
         public DateTime OrderDate { get; set; }
         public object ChannelCustomerNo { get; set; }
         public ExtraData ExtraData { get; set; }
-    }
-
-    public class ExtraData
-    {
-        public string Extra { get; set; }
-    }
+    }    
 }
