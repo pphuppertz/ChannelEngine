@@ -46,8 +46,11 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="ChannelEngineResponse.cs" />
+    <Compile Include="ExtraData.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
