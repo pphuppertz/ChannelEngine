@@ -10,5 +10,6 @@ namespace ChannelEngine
     {
         Task<IList<Order>> GetOrdersInProgress();
         Task<IList<Product>> GetProductsByMerchantProductNumber(string[] MerchantProductNumbers);
+        Task<string> UpdateStockForProduct(string merchantProductNumber, int stock);
     }
 }

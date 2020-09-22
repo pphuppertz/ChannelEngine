@@ -42,7 +42,7 @@ namespace ChannelEngine
         {
             IList<Product> result = null;
             string merchantNumberQuery = string.Empty;
-            foreach(string s in MerchantProductNumbers)
+            foreach (string s in MerchantProductNumbers)
             {
                 merchantNumberQuery = "&merchantProductNoList=" + s;
             }
@@ -61,11 +61,38 @@ namespace ChannelEngine
             return result;
         }
 
+        public async Task<string> UpdateStockForProduct(string merchantProductNumber, int stock)
+        {
+            string result = null;
+
+            using (var client = CreateHttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("Patch"), new Uri(baseUrl + productSuffix + merchantProductNumber)))
+                {
+                    // pretty sure this could have been a lot prettier in .NET Core. 
+                    var patches = new List<Dictionary<string, string>>
+                    {
+                        new Dictionary<string, string>
+                        {
+                            { "op", "replace" },
+                            { "path", "Stock" },
+                            { "value", stock.ToString() }
+                        }
+                    };
+
+                    var content = JsonConvert.SerializeObject(patches);
+                    request.Content = new StringContent(content, System.Text.Encoding.UTF8, "application/json-patch");
+                    var response = await client.SendAsync(request);
+                    result = await response.Content.ReadAsStringAsync();
+                }
+            }
+            return result;
+        }
 
         private HttpClient CreateHttpClient()
         {
             HttpClient result = new HttpClient();
-            
+
             result.DefaultRequestHeaders.Accept.Clear();
             result.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             result.DefaultRequestHeaders.Add("X-CE-KEY", apiKey);

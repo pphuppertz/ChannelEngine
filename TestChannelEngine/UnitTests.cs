@@ -34,9 +34,7 @@ namespace TestChannelEngine
             var topNProducts = controller.TakeTopNProductsFromOrders(orders, 5);
 
             Assert.IsTrue(topNProducts.Count == 4);
-            Assert.IsTrue(topNProducts[0].Description == "T - shirt met lange mouw BASIC petrol: M");
+            Assert.IsTrue(topNProducts[0].Description == "T-shirt met lange mouw BASIC petrol: M");
         }
-
-
     }
 }

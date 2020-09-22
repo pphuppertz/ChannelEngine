@@ -27,5 +27,10 @@ namespace TestChannelEngine
         {
             throw new NotImplementedException();
         }
+
+        public Task<string> UpdateStockForProduct(string merchantProductNumber, int stock)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -38,14 +38,31 @@ namespace ChannelEngineBL
         public IList<OrderLine>TakeTopNProductsFromOrders(IList<Order> orders, int take)
         {
             IList<OrderLine> result = null;
-            List<OrderLine> lines = new List<OrderLine>();
+            List<OrderLine> foundLines = new List<OrderLine>();
             foreach (var order in orders)
             {
-                lines.AddRange(order.Lines);    
+                foreach (var line in order.Lines)
+                {
+                    OrderLine foundLine = foundLines.FirstOrDefault(l => l.MerchantProductNo == line.MerchantProductNo);
+                    if (foundLine != null)
+                    {
+                        foundLine.Quantity += line.Quantity;
+                    }
+                    else
+                    {
+                        foundLines.Add(line);
+                    }
+                }
             }
-            result = lines.OrderByDescending(l => l.Quantity).Take(take).ToList();
+            result = foundLines.OrderByDescending(l => l.Quantity).ThenBy(l => l.Description).Take(take).ToList();
 
             return result;            
+        }
+
+        public async Task<string> UpdateStockForProduct(string merchantProductNumber, int stockQuantity)
+        {
+            string result = await repository.UpdateStockForProduct(merchantProductNumber, stockQuantity);
+            return result;
         }
     }
 }
