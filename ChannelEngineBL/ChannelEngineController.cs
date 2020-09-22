@@ -10,7 +10,7 @@ namespace ChannelEngineBL
     public class ChannelEngineController
     {
 
-        IRepository repository = null;
+        private readonly IRepository repository = null;
 
         public ChannelEngineController() 
         {

@@ -25,11 +25,13 @@ namespace TestChannelEngine
 
         public async Task<IList<Product>> GetProductsByMerchantProductNumber(string[] MerchantProductNumbers)
         {
+            await Task.Delay(100);
             throw new NotImplementedException();
         }
 
-        public Task<string> UpdateStockForProduct(string merchantProductNumber, int stock)
+        public async Task<string> UpdateStockForProduct(string merchantProductNumber, int stock)
         {
+            await Task.Delay(100);
             throw new NotImplementedException();
         }
     }

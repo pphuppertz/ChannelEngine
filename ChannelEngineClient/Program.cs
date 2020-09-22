@@ -6,7 +6,7 @@ namespace ChannelEngineClient
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task Main()
         {
             var controller = new ChannelEngineController();
             var orders = await controller.GetOutstandingOrders();

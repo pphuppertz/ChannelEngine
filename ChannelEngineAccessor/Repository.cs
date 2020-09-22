@@ -12,11 +12,11 @@ namespace ChannelEngine
     public class Repository : IRepository
     {
 
-        private static string baseUrl = "https://api-dev.channelengine.net/api/v2/";
-        private static string orderSuffix = "orders/";
-        private static string productSuffix = "products/";
-        private static string inProgressQuery = "?statuses=IN_PROGRESS";
-        private static string apiKey = "541b989ef78ccb1bad630ea5b85c6ebff9ca3322";
+        private static readonly string baseUrl = "https://api-dev.channelengine.net/api/v2/";
+        private static readonly string orderSuffix = "orders/";
+        private static readonly string productSuffix = "products/";
+        private static readonly string inProgressQuery = "?statuses=IN_PROGRESS";
+        private static readonly string apiKey = "541b989ef78ccb1bad630ea5b85c6ebff9ca3322";
 
         public Repository()
         {
@@ -38,19 +38,19 @@ namespace ChannelEngine
             return result;
         }
 
-        public async Task<IList<Product>> GetProductsByMerchantProductNumber(string[] MerchantProductNumbers)
+        public async Task<IList<Product>> GetProductsByMerchantProductNumber(string[] merchantProductNumbers)
         {
             IList<Product> result = null;
-            string merchantNumberQuery = string.Empty;
-            foreach (string s in MerchantProductNumbers)
+            string merchantProductNumberQuery = string.Empty;
+            foreach (string s in merchantProductNumbers)
             {
-                merchantNumberQuery = "&merchantProductNoList=" + s;
+                merchantProductNumberQuery = "&merchantProductNoList=" + s;
             }
-            merchantNumberQuery = merchantNumberQuery.Substring(1);
+            merchantProductNumberQuery = merchantProductNumberQuery.Substring(1);
 
             using (var client = CreateHttpClient())
             {
-                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(baseUrl + productSuffix + merchantNumberQuery)))
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(baseUrl + productSuffix + merchantProductNumberQuery)))
                 {
                     var response = await client.SendAsync(request);
                     var content = await response.Content.ReadAsStringAsync();
