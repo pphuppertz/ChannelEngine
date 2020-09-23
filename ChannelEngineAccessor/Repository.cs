@@ -38,29 +38,6 @@ namespace ChannelEngine
             return result;
         }
 
-        public async Task<IList<Product>> GetProductsByMerchantProductNumber(string[] merchantProductNumbers)
-        {
-            IList<Product> result = null;
-            string merchantProductNumberQuery = string.Empty;
-            foreach (string s in merchantProductNumbers)
-            {
-                merchantProductNumberQuery = "&merchantProductNoList=" + s;
-            }
-            merchantProductNumberQuery = merchantProductNumberQuery.Substring(1);
-
-            using (var client = CreateHttpClient())
-            {
-                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(baseUrl + productSuffix + merchantProductNumberQuery)))
-                {
-                    var response = await client.SendAsync(request);
-                    var content = await response.Content.ReadAsStringAsync();
-                    result = JsonConvert.DeserializeObject<ChannelEngineResponse<Product>>(content).Content;
-                }
-            }
-
-            return result;
-        }
-
         public async Task<string> UpdateStockForProduct(string merchantProductNumber, int stock)
         {
             string result = null;

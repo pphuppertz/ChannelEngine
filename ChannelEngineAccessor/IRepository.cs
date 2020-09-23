@@ -8,8 +8,7 @@ namespace ChannelEngine
 {
     public interface IRepository
     {
-        Task<IList<Order>> GetOrdersInProgress();
-        Task<IList<Product>> GetProductsByMerchantProductNumber(string[] MerchantProductNumbers);
+        Task<IList<Order>> GetOrdersInProgress();        
         Task<string> UpdateStockForProduct(string merchantProductNumber, int stock);
     }
 }

@@ -35,28 +35,25 @@ namespace ChannelEngineBL
             return orders;
         }
 
-        public IList<OrderLine>TakeTopNProductsFromOrders(IList<Order> orders, int take)
+        public IList<LineItem>TakeTopNProductsFromOrders(IList<Order> orders, int take)
         {
-            IList<OrderLine> result = null;
-            List<OrderLine> foundLines = new List<OrderLine>();
-            foreach (var order in orders)
-            {
-                foreach (var line in order.Lines)
+            var result = orders
+                .SelectMany(o => o.Lines)
+                .GroupBy(o => o.MerchantProductNo)
+                .Select(l => new LineItem
                 {
-                    OrderLine foundLine = foundLines.FirstOrDefault(l => l.MerchantProductNo == line.MerchantProductNo);
-                    if (foundLine != null)
-                    {
-                        foundLine.Quantity += line.Quantity;
-                    }
-                    else
-                    {
-                        foundLines.Add(line);
-                    }
-                }
-            }
-            result = foundLines.OrderByDescending(l => l.Quantity).ThenBy(l => l.Description).Take(take).ToList();
+                    Gtin = l.First().Gtin,
+                    MerchantProductNumber = l.First().MerchantProductNo,
+                    Name = l.First().Description,
+                    Quantity = l.Sum(q => q.Quantity)
+                })
+                .OrderByDescending(l => l.Quantity).ThenBy(l => l.Name).Take(take).ToList();
+            // The MerchantProductNo is included because it is the only unique identifier for the product, 
+            // at least in the data set provided. I am assuming that this is used by one merchant. If it is not unique, 
+            // but a composite key with the EAN is, the MerchantProductNo is still needed for setting a quantity, 
+            // as all T-shirts have the same EAN (Gtin), regardless of size.
 
-            return result;            
+            return result;          
         }
 
         public async Task<string> UpdateStockForProduct(string merchantProductNumber, int stockQuantity)

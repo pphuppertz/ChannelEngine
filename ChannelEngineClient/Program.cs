@@ -19,18 +19,14 @@ namespace ChannelEngineClient
             Console.WriteLine("Products in outstanding orders:");
             foreach (var line in top5Lines)
             {
-                Console.WriteLine("Product: {0} \t{1} \t {2} \t{3}", line.Description, line.Gtin, line.MerchantProductNo, line.Quantity);
-                // the MerchantProductNo is included because it is the only unique identifier for the product, 
-                // at least in the data set provided. I am assuming that this is used by one merchant. If it is not unique, 
-                // but a composite key with the EAN is, the MerchantProductNo is still needed for setting a quantity, 
-                // as all T-shirts have the same EAN (Gtin), regardless of size. 
+                Console.WriteLine("Product: {0} \t{1} \t {2} \t{3}", line.Name, line.Gtin, line.MerchantProductNumber, line.Quantity);                 
             }
             Console.ReadKey();
 
-            string result = await controller.UpdateStockForProduct(top5Lines[0].MerchantProductNo, 25);
+            Console.WriteLine("Setting quantity for top product to 25...");
+            string result = await controller.UpdateStockForProduct(top5Lines[0].MerchantProductNumber, 25);
             Console.WriteLine(result);
+            Console.WriteLine("... all done. Press any key to end this program.");
         }
-
-
     }
 }
