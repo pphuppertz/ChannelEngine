@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ChannelEngineBL.LineItem>
+
+@{
+    ViewBag.Title = "Most ordered products (5 maximum)";
+}
+
+<h2>Most ordered products</h2>
+<table border="0" cellpadding="15">
+    <thead>
+        <tr>
+            <th align="left">Product name</th>
+            <th align="left">GTin</th>
+            <th align="left">Vendor ProductNo</th>
+            <th align="left">Total outstanding</th>
+        </tr>
+    </thead>
+    <tbody>        
+        @foreach (var o in Model)
+        {   
+            <tr>
+                <td align="left">@o.Name</td>
+                <td align="center">@o.Gtin</td>
+                <td align="center">@Html.ActionLink(o.MerchantProductNumber, "/Details", new { merchantProductNumber = o.MerchantProductNumber })</td>
+                <td align="right">@o.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>

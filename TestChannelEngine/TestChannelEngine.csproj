@@ -63,10 +63,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChannelEngineAccessor\ChannelEngine.csproj">
-      <Project>{6797e4c8-a4f0-4575-a0ed-c026c3200265}</Project>
-      <Name>ChannelEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ChannelEngineBL\ChannelEngineBL.csproj">
       <Project>{a4c01513-3d9b-49eb-a041-bc5d3cc97033}</Project>
       <Name>ChannelEngineBL</Name>

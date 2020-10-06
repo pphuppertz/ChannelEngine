@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChannelEngine
+namespace ChannelEngineBL
 {
     public class ChannelEngineResponse<T>
     {
-        public IList<T> Content { get; set; }
+        public T Content { get; set; }
         public int Count { get; set; }
         public int TotalCount { get; set; }
         public int ItemsPerPage { get; set; }

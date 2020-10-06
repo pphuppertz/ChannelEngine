@@ -1,4 +1,4 @@
-﻿namespace ChannelEngine
+﻿namespace ChannelEngineBL
 {
     public class ExtraData
     {

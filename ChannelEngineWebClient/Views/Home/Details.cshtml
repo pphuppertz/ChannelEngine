@@ -1,0 +1,49 @@
+﻿@model ChannelEngineWebClient.Models.ProductDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+    <h2>Product details</h2>
+    <p />
+    <table border="0" cellpadding="15">
+        <thead>
+            <tr>
+                <th align="left">Description</th>
+                <th align="left">GTI/EAN</th>
+                <th align="left">Product #</th>
+                <th align="left">Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td align="left">@Model.Description</td>
+                <td align="center">@Model.Gti</td>
+                <td align="center">@Model.MerchantProductNumber</td>
+                <td align="right">@Model.QuantityInStock</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <div>
+        <form method="POST">
+            <label for="updateStock">Desired stocked quantity:</label>
+            <input type="hidden" id="productNo" name="productNo" value=@Model.MerchantProductNumber /> 
+            @*TODO: One would think there is a better way to pass the product number in.*@ 
+            <input type="number" id="updateStock" placeholder="Stock quantity" name="updateStock" />
+            <input type="submit" />
+        </form>
+    </div>
+    <div>
+        <p />
+        @Html.ActionLink("Back to Top 5 Items", "/Index")
+    </div>
+</body>
+</html>

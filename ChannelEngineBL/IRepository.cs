@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChannelEngine
+namespace ChannelEngineBL
 {
     public interface IRepository
     {
-        Task<IList<Order>> GetOrdersInProgress();        
+        Task<IList<Order>> GetOrdersInProgress();
+        Task<Product> GetProductByMerchantProductNumber(string merchantProductNumber);
         Task<string> UpdateStockForProduct(string merchantProductNumber, int stock);
     }
 }

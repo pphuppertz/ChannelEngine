@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,14 +44,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChannelEngineController.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="ChannelEngineHelper.cs" />
+    <Compile Include="ChannelEngineResponse.cs" />
+    <Compile Include="ExtraData.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="LineItem.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="OrderLine.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChannelEngineAccessor\ChannelEngine.csproj">
-      <Project>{6797e4c8-a4f0-4575-a0ed-c026c3200265}</Project>
-      <Name>ChannelEngine</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

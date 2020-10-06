@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ChannelEngine;
 
 namespace ChannelEngineBL
 {
-    public class ChannelEngineController
+    public class ChannelEngineHelper
     {
 
         private readonly IRepository repository = null;
 
-        public ChannelEngineController() 
+        public ChannelEngineHelper() 
         {
             repository = new Repository();
         }
 
-        public ChannelEngineController(IRepository repository)
+        public ChannelEngineHelper(IRepository repository)
         {
             if (repository != null)
             {
@@ -33,6 +32,12 @@ namespace ChannelEngineBL
         {
             var orders = await repository.GetOrdersInProgress();
             return orders;
+        }
+
+        public async Task<Product> GetProductbyMerchantProductNumber(string merchantProductNumber)
+        {
+            var result = await repository.GetProductByMerchantProductNumber(merchantProductNumber);
+            return result;
         }
 
         public IList<LineItem>TakeTopNProductsFromOrders(IList<Order> orders, int take)

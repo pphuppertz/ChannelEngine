@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ChannelEngine;
 using ChannelEngineBL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,10 +13,10 @@ namespace TestChannelEngine
         {
             //arrange
             IRepository repository = new MockedRepository();
-            ChannelEngineController controller = new ChannelEngineController(repository);
+            ChannelEngineHelper helper = new ChannelEngineHelper(repository);
 
             //act
-            var orders = await controller.GetOutstandingOrders();
+            var orders = await helper.GetOutstandingOrders();
 
             Assert.IsTrue(orders.Count == 6);
         }
@@ -27,7 +26,7 @@ namespace TestChannelEngine
         {
             //arrange
             IRepository repository = new MockedRepository();
-            ChannelEngineController controller = new ChannelEngineController(repository);
+            ChannelEngineHelper controller = new ChannelEngineHelper(repository);
             var orders = await controller.GetOutstandingOrders();
 
             //act

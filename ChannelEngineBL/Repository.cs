@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace ChannelEngine
+namespace ChannelEngineBL
 {
     public class Repository : IRepository
     {
@@ -32,9 +32,26 @@ namespace ChannelEngine
                 {
                     var response = await client.SendAsync(request);
                     var content = await response.Content.ReadAsStringAsync();
-                    result = JsonConvert.DeserializeObject<ChannelEngineResponse<Order>>(content).Content;
+                    result = JsonConvert.DeserializeObject<ChannelEngineResponse<List<Order>>>(content).Content;
                 }
             }
+            return result;
+        }
+
+        public async Task<Product> GetProductByMerchantProductNumber(string merchantProductNumber)
+        {
+            Product result = null;
+
+            using (var client = CreateHttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, new Uri(baseUrl + productSuffix + merchantProductNumber)))
+                {
+                    var response = await client.SendAsync(request);
+                    var content = await response.Content.ReadAsStringAsync();
+                    result = JsonConvert.DeserializeObject<ChannelEngineResponse<Product>>(content).Content;
+                }
+            }
+
             return result;
         }
 
